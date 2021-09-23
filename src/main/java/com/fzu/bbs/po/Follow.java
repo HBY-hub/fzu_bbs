@@ -14,15 +14,12 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("tb_passage")
-public class Passage {
+@TableName("tb_follow")
+public class Follow {
     private Long id;
-    private String title;
-    private String description;
-    private Date createTime;
-    private Date updateTime;
-    private Integer readNum;
-    private String content;
-    private String userName;
-    private Integer likeNum;
+    private Integer toId;
+    private Integer fromId;
+    private String to;
+    private String from;
+
 }
