@@ -1,3 +1,5 @@
+drop database bbs ;
+create database bbs;
 use bbs;
 CREATE TABLE `tb_user` (
                            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
