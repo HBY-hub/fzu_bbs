@@ -25,4 +25,5 @@ public class Passage {
     private String content;
     private String theme;
     private String userName;
+    private Integer likeNum;
 }

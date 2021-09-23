@@ -25,6 +25,7 @@ CREATE TABLE `tb_passage` (
                            `theme` varchar(50) DEFAULT NULL COMMENT '主题',
                            `user_name` varchar(50) DEFAULT NULL COMMENT '发帖人',
                            `read_num` int(11) DEFAULT 0 COMMENT '阅读量',
+                           `like_num` int(11) DEFAULT 0 comment '点赞数',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 CREATE TABLE `tb_theme` (
