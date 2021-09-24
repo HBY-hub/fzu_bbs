@@ -17,5 +17,4 @@ public class PassageTheme {
     private Integer themeId;
     private String passage;
     private String theme;
-
 }

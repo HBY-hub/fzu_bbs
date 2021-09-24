@@ -21,5 +21,4 @@ public class Follow {
     private Integer fromId;
     private String to;
     private String from;
-
 }
