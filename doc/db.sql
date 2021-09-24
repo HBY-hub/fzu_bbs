@@ -90,3 +90,9 @@ INSERT INTO `tb_follow` (  `from`,`from_id`,`to`,`to_id`) VALUES
 INSERT INTO `tb_passage_theme` ( `id`,`passage`,`passage_id`,`theme`,`theme_id`) VALUES
     ('1','here id a title','1','失物招领','1');
 
+
+-- 修改一下两个id值的属性，统一为long
+USE bbs
+ALTER TABLE `tb_comment` MODIFY `passage` BIGINT(20)
+ALTER TABLE `tb_comment` MODIFY `father` BIGINT(20)
+
