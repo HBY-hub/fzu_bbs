@@ -1,9 +1,8 @@
-package com.fzu.bbs;
+package services;
 
-import com.fzu.bbs.mapper.ThemeMapper;
-import com.fzu.bbs.mapper.UserMapper;
-import com.fzu.bbs.po.Theme;
+
 import com.fzu.bbs.po.User;
+import com.fzu.bbs.services.UserServices;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
-public class ThemeMapperTest {
+@SpringBootTest(classes = {com.fzu.bbs.BbsApplication.class})
+public class UserServicesTest {
     @Autowired
-    private ThemeMapper themeMapper;
-
+    UserServices userServices;
     @Test
-    public void testSelect(){
-        List<Theme> themeList= themeMapper.selectList(null);
+    public void testGetUserByName(){
+        List<User> userList = userServices.getUserByName("zhangsan");
+        userList.forEach(System.out::println);
 
-        themeList.forEach(System.out::println);
     }
 }

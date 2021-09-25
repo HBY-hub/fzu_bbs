@@ -77,6 +77,8 @@ INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) 
 
 INSERT INTO `tb_passage` (`id`,`title` ,`user_name`, `description`,  `content`) VALUES
     ('1','here is a title', 'zhangsan', 'here is description', 'here is content');
+INSERT INTO `tb_passage` (`title` ,`user_name`, `description`,  `content`) VALUES
+    ('here is a title', 'lisi', 'here is description', 'here is content');
 INSERT INTO `tb_theme` (`id`,  `theme`) VALUES
     ('1', '失物招领');
 INSERT INTO `tb_academy` (`id`,  `academy`) VALUES

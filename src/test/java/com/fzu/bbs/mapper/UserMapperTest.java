@@ -1,8 +1,6 @@
-package com.fzu.bbs;
+package com.fzu.bbs.mapper;
 
-import com.fzu.bbs.mapper.PassageMapper;
 import com.fzu.bbs.mapper.UserMapper;
-import com.fzu.bbs.po.Passage;
 import com.fzu.bbs.po.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,14 +12,14 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class PassageMapperTest {
+public class UserMapperTest {
     @Autowired
-    private PassageMapper passageMapper;
+    private UserMapper userMapper;
 
     @Test
     public void testSelect(){
-        List<Passage> passageList= passageMapper.selectList(null);
+        List<User> userList= userMapper.selectList(null);
 
-        passageList.forEach(System.out::println);
+        userList.forEach(System.out::println);
     }
 }

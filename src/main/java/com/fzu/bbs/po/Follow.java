@@ -17,8 +17,8 @@ import java.util.List;
 @TableName("tb_follow")
 public class Follow {
     private Long id;
-    private Integer toId;
-    private Integer fromId;
+    private Long toId;
+    private Long fromId;
     private String to;
     private String from;
 }

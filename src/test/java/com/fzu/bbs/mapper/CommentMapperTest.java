@@ -1,7 +1,9 @@
-package com.fzu.bbs;
+package com.fzu.bbs.mapper;
 
-import com.fzu.bbs.mapper.AcademyMapper;
-import com.fzu.bbs.po.Academy;
+import com.fzu.bbs.mapper.CommentMapper;
+import com.fzu.bbs.mapper.UserMapper;
+import com.fzu.bbs.po.Comment;
+import com.fzu.bbs.po.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,14 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class AcademyMapperTest {
+public class CommentMapperTest {
     @Autowired
-    private AcademyMapper academyMapper;
+    private CommentMapper commentMapper;
 
     @Test
     public void testSelect(){
-        List<Academy> academyList= academyMapper.selectList(null);
+        List<Comment> commentList= commentMapper.selectList(null);
 
-        academyList.forEach(System.out::println);
+        commentList.forEach(System.out::println);
     }
 }
