@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @TableName("tb_user")
 public class User {
-    private Long id;
+    private Integer id;
     private String userName;
     private String password;
     private Date createTime;

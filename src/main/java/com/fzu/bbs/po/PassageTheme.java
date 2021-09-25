@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @TableName("tb_passage_theme")
 public class PassageTheme {
-    private Long id;
+    private Integer id;
     private Integer passageId;
     private Integer themeId;
     private String passage;

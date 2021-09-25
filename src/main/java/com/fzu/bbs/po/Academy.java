@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("tb_academy")
 public class Academy {
-    private Long id;
+    private Integer id;
     private String academy;
     private Date createTime;
 }

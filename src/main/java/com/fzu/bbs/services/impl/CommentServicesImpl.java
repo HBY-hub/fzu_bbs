@@ -14,7 +14,7 @@ public class CommentServicesImpl implements CommentServices {
 
 
     @Override
-    public boolean addComment(String content, Long father, Long passageId, String username) {
+    public boolean addComment(String content, Integer father, Integer passageId, String username) {
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setPassage(Math.toIntExact(passageId));
@@ -25,7 +25,7 @@ public class CommentServicesImpl implements CommentServices {
     }
 
     @Override
-    public boolean deleteComment(Long commentId) {
+    public boolean deleteComment(Integer commentId) {
         if(commentMapper.deleteById(commentId)>0){
             return true;
         }else

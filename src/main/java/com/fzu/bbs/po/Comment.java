@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("tb_comment")
 public class Comment {
-    private Long id;
+    private Integer id;
     private Integer father;
     private Integer passage;
     private String user_name;

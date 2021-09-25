@@ -93,7 +93,7 @@ INSERT INTO `tb_passage_theme` ( `id`,`passage`,`passage_id`,`theme`,`theme_id`)
     ('1','here id a title','1','失物招领','1');
 
 
--- 修改一下两个id值的属性，统一为long
+-- 修改一下两个id值的属性，统一为Integer
 USE bbs
 ALTER TABLE `tb_comment` MODIFY `passage` BIGINT(20)
 ALTER TABLE `tb_comment` MODIFY `father` BIGINT(20)

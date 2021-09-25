@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("tb_theme")
 public class Theme {
-    private Long id;
+    private Integer id;
     private String theme;
     private Date createTime;
 }

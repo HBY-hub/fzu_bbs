@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserServices {
     boolean addUser(User user);
-    boolean updateUserPassword(Long id,String password);
-    User getUserById(Long id);
+    boolean updateUserPassword(Integer id,String password);
+    User getUserById(Integer id);
     List<User> getUserByName(String username);
 }

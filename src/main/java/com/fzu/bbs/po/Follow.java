@@ -16,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @TableName("tb_follow")
 public class Follow {
-    private Long id;
-    private Long toId;
-    private Long fromId;
+    private Integer id;
+    private Integer toId;
+    private Integer fromId;
     private String to;
     private String from;
 }

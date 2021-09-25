@@ -26,7 +26,7 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public boolean updateUserPassword(Long id, String password) {
+    public boolean updateUserPassword(Integer id, String password) {
         User user = userMapper.selectById(id);
         if(user.getPassword()==password){
             return false;
@@ -37,7 +37,7 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(Integer id) {
         return userMapper.selectById(id);
     }
 

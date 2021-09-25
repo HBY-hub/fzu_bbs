@@ -23,7 +23,7 @@ public class PassageServicesImpl implements PassageServices {
     }
 
     @Override
-    public boolean deletePassageById(Long id) {
+    public boolean deletePassageById(Integer id) {
         Integer result = passageMapper.deleteById(id) ;
         return result>0;
     }
