@@ -3,7 +3,9 @@ package com.fzu.bbs.services.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fzu.bbs.mapper.CommentMapper;
 import com.fzu.bbs.mapper.PassageMapper;
+import com.fzu.bbs.po.Comment;
 import com.fzu.bbs.po.Passage;
 import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.PassageServices;
@@ -18,6 +20,8 @@ import java.util.List;
 public class PassageServicesImpl implements PassageServices {
     @Autowired
     PassageMapper passageMapper;
+    @Autowired
+    CommentMapper commentMapper;
 
     @Override
     public boolean addPassage(Passage passage) {
@@ -27,6 +31,12 @@ public class PassageServicesImpl implements PassageServices {
 
     @Override
     public boolean deletePassageById(Integer id) {
+        //删除其评论
+        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+        wrapper.eq("passage",id);
+        if(commentMapper!=null){
+            commentMapper.delete(wrapper);
+        }
         Integer result = passageMapper.deleteById(id) ;
         return result>0;
     }

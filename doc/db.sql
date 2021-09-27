@@ -109,3 +109,7 @@ INSERT INTO `bbs`.`tb_user` (`user_name`, `passwORD`, `agE`, `email`, `PHONe`, `
 INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`) VALUES ('母猪产后护理', '论母猪产后护理', 'lisa');
 INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`) VALUES ('黑暗料理之道', 'aaaaaa', 'lisay');
 INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`) VALUES ('母狗产后护理', 'bbbbb', 'lisa');
+
+-- comment
+INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `passage`, `father`) VALUES ('lisa', 'aaaaa', '1', '1');
+INSERT INTO `BBS`.`tb_comment` (`user_name`, `content`, `pASSAGE`, `Father`) VALUES ('lsl', 'bbbbb', '1', '2');

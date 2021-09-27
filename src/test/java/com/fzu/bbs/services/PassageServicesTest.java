@@ -26,4 +26,9 @@ public class PassageServicesTest {
         passages.forEach(System.out::println);
     }
 
+    @Test
+    public void deleteById(){
+        passageServices.deletePassageById(4);
+    }
+
 }
