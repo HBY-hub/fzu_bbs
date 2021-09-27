@@ -5,5 +5,6 @@ import com.fzu.bbs.po.Academy;
 import com.fzu.bbs.po.Theme;
 import com.fzu.bbs.po.User;
 
+
 public interface AcademyMapper extends BaseMapper<Academy> {
 }
