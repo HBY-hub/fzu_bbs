@@ -19,4 +19,11 @@ public class PassageServicesTest {
         passages.forEach(System.out::println);
     }
 
+    @Test
+    public void getPassageByName(){
+        List<Passage> passages = passageServices.getPassagesByName("产后");
+        System.out.println(passages.size());
+        passages.forEach(System.out::println);
+    }
+
 }

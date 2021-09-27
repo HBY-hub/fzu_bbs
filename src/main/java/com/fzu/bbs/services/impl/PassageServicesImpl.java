@@ -5,10 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fzu.bbs.mapper.PassageMapper;
 import com.fzu.bbs.po.Passage;
+import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.PassageServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -36,4 +39,23 @@ public class PassageServicesImpl implements PassageServices {
         List<Passage> passageList = passageMapper.selectPage(passageIPage, queryWrapper).getRecords();
         return passageList;
     }
+
+    //根据名称模糊查询passage
+    @Override
+    public List<Passage> getPassagesByName(String passageName) {
+        List<Passage> passageList = new ArrayList();
+        QueryWrapper<Passage> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .like("title",passageName);
+        passageList = passageMapper.selectList(queryWrapper);
+        passageList.sort(new Comparator<Passage>() {
+            @Override
+            public int compare(Passage o1, Passage o2) {
+                return o1.getUserName().length()-o2.getUserName().length();
+            }
+        });
+        return passageList;
+    }
+
+
 }
