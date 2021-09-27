@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -41,12 +42,21 @@ public class UserServicesImpl implements UserServices {
         return userMapper.selectById(id);
     }
 
+    //根据名字模糊查询,名字短的在前
     @Override
     public List<User> getUserByName(String username) {
         List<User> userList = new ArrayList();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name",username);
+        queryWrapper
+                .like("user_name",username);
+//        queryWrapper.eq("user_name",username);
         userList = userMapper.selectList(queryWrapper);
+        userList.sort(new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.getUserName().length()-o2.getUserName().length();
+            }
+        });
         return userList;
     }
 }

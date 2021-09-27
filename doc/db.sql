@@ -98,3 +98,8 @@ USE bbs
 ALTER TABLE `tb_comment` MODIFY `passage` BIGINT(20)
 ALTER TABLE `tb_comment` MODIFY `father` BIGINT(20)
 
+-- 插一些数据
+INSERT INTO `bbs`.`tb_user` (`user_name`, `password`, `age`, `email`, `phone`, `academy`) VALUES ('lisa', '654321', '19', 'abc@qq.com', '123321231', '土木工程学院');
+INSERT INTO `bbs`.`tb_user` (`USER_nAME`, `password`, `age`, `email`, `phone`, `academy`) VALUES ('lisay', '666666', '21', 'Absn@qq.com', '122132341', '土木工程学院');
+INSERT INTO `bbs`.`tb_user` (`user_name`, `password`, `age`, `EMaIL`, `phone`, `academy`) VALUES ('slisa', '434434', '22', 'dfsd@qq.com', '134324234', '电气学院');
+INSERT INTO `bbs`.`tb_user` (`user_name`, `passwORD`, `agE`, `email`, `PHONe`, `academy`) VALUES ('slisary', '222222', '17', 'Rwydsuy@qq.com', '231321321', '计算机学院');

@@ -21,7 +21,7 @@ public class PassageMapperTest {
     @Test
     public void testSelect(){
         List<Passage> passageList= passageMapper.selectList(null);
-
         passageList.forEach(System.out::println);
     }
+
 }
