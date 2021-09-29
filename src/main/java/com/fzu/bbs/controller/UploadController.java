@@ -1,6 +1,7 @@
 package com.fzu.bbs.controller;
 
 import com.fzu.bbs.utils.AliyunOSSUtil;
+import com.fzu.bbs.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,13 @@ public class UploadController {
     @Autowired
     private AliyunOSSUtil aliyunOSSUtil;
 
-    @GetMapping("/upload")
+    @GetMapping("/ossUpload")
     public String getUpload(){
         return "post";
     }
 
-    @PostMapping("/upload")
-    public String toUploadBlogPost(MultipartFile file) {
+    @PostMapping("/ossUpload")
+    public R toUploadBlogPost(MultipartFile file) {
         try {
 
             if (null != file) {
@@ -35,7 +36,8 @@ public class UploadController {
                     os.close();
                     file.transferTo(newFile);
                     //上传到OSS
-                    return aliyunOSSUtil.uploadFile(newFile);
+//                    return aliyunOSSUtil.uploadFile(newFile);
+                    return R.ok(aliyunOSSUtil.uploadFile(newFile));
 
                 }
 
@@ -43,6 +45,6 @@ public class UploadController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return R.fail();
     }
 }

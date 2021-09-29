@@ -9,4 +9,5 @@ public interface UserServices {
     boolean updateUserPassword(Integer id,String password);
     User getUserById(Integer id);
     List<User> getUserByName(String username);
+    Integer checkUser(String username,String password);
 }

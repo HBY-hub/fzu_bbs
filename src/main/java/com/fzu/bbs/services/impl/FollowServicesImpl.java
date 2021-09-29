@@ -19,17 +19,31 @@ public class FollowServicesImpl implements FollowServices {
     private FollowMapper followMapper;
 
     @Override
-    public boolean addFollow(User fromUser, User toUser) {
+    public boolean addFollow(String fromUser,String toUser) {
+
         Follow follow = new Follow();
-        follow.setFrom(fromUser.getUserName());
-        follow.setTo(toUser.getUserName());
-        follow.setFromId(fromUser.getId());
-        follow.setToId(toUser.getId());
-        return false;
+
+        follow.setFrom(fromUser);
+
+        follow.setTo(toUser);
+
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_name",toUser);
+        follow.setToId(userMapper.selectOne(queryWrapper).getId());
+
+        queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_name",fromUser);
+        follow.setFromId(userMapper.selectOne(queryWrapper).getId());
+        return true;
     }
 
     @Override
-    public boolean deleteFollow(User fromUser, User toUser) {
-        return false;
+    public boolean deleteFollow(String fromUser, String toUser) {
+        QueryWrapper<Follow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("from",fromUser);
+        queryWrapper.eq("to",toUser);
+        followMapper.delete(queryWrapper);
+        return true;
     }
+
 }

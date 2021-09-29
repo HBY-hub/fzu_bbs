@@ -59,4 +59,13 @@ public class UserServicesImpl implements UserServices {
         });
         return userList;
     }
+
+    @Override
+    public Integer checkUser(String username,String password) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name",username);
+        User user = userMapper.selectOne(queryWrapper);
+        if(user==null||!user.getPassword().equals(password))return -1;
+        return user.getId();
+    }
 }

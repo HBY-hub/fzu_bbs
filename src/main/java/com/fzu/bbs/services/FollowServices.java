@@ -5,6 +5,6 @@ import com.fzu.bbs.po.User;
 import java.util.List;
 
 public interface FollowServices {
-    boolean addFollow(User fromUser,User toUser);
-    boolean deleteFollow(User fromUser,User toUser);
+    boolean addFollow(String fromUser,String toUser);
+    boolean deleteFollow(String fromUser,String toUser);
 }
