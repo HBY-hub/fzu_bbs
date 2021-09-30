@@ -2,6 +2,7 @@ package com.fzu.bbs.controller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.UserServices;
 import com.fzu.bbs.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,14 @@ public class LoginController {
         StpUtil.login(id);
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return R.ok(tokenInfo);
+    }
+    @GetMapping("/login")
+    @ResponseBody
+    public R getUser(String token){
+        Integer id = Integer.parseInt((String) StpUtil.getLoginIdByToken(token));
+        User user = userServices.getUserById(id);
+        if(user==null)return R.fail();
+        return R.ok(user);
     }
 
 }
