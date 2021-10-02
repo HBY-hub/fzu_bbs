@@ -1,14 +1,19 @@
 package com.fzu.bbs.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.fzu.bbs.po.Passage;
+import com.fzu.bbs.po.Theme;
 import com.fzu.bbs.services.PassageServices;
 import com.fzu.bbs.services.PassageThemeServices;
 import com.fzu.bbs.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PassageController {
@@ -18,18 +23,21 @@ public class PassageController {
     PassageThemeServices passageThemeServices;
 
     @GetMapping("addPassage")
-    public R addPassage(String title,String description,String theme,String username){
-        Passage passage = new Passage();
-        passage.setTitle(title);
-        passage.setDescription(description);
-        passage.setUserName(username);
+    @ResponseBody
+    public R addPassage(@RequestBody Map<String,Object> args){
+        System.out.println(args);
+        Passage passage  = JSON.parseObject(JSON.toJSONString(args),Passage.class);
+        String theme = (String) args.get("theme");
         passageServices.addPassage(passage);
-        passageThemeServices.addPassageTheme(title,theme);
+        passageThemeServices.addPassageTheme(passage.getTitle(),theme);
         return R.ok();
     }
     @GetMapping("getHotPassage")
-    public R getHotPassage(Integer num,Integer page){
-        List passageList = passageServices.getLatestPassage(num,page);
+    public R getHotPassage(@RequestBody Map<String,Object> args){
+        Integer num = (Integer) args.get("num");
+        Integer page = (Integer) args.get("page");
+        String theme = (String) args.get("theme");
+        List passageList = passageServices.getLatestPassage(num,page,theme);
         if(passageList==null)return R.fail();
         return R.ok(passageList);
     }

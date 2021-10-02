@@ -18,7 +18,7 @@ public class PassageServicesTest {
 
     @Test
     public void passagePageSelectTest (){
-        List<Passage> passageList= passageServices.getLatestPassage(2,1);
+        List<Passage> passageList= passageServices.getLatestPassage(2,1,"");
         passageList.forEach(System.out::println);
 
     }

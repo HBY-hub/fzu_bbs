@@ -14,7 +14,7 @@ public class HelloController {
     PassageServices passageServices;
     @GetMapping("test")
     public String Hello(){
-        List<Passage> passageList = passageServices.getLatestPassage(1,1);
+        List<Passage> passageList = passageServices.getLatestPassage(1,1,"");
         return passageList.toString();
     }
 

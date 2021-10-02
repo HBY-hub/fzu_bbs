@@ -18,6 +18,7 @@ CREATE TABLE `tb_user` (
 CREATE TABLE `tb_passage` (
                            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
                            `title` varchar(255) NOT NULL COMMENT '标题',
+                           `theme` varchar(255) NOT NULL COMMENT '主题',
                            `description` varchar(255) NOT NULL COMMENT '描述',
                            `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                            `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后一次修改时间',
@@ -75,10 +76,10 @@ INSERT INTO `tb_user` (`id`, `user_name`, `password`,  `age`, `email`,phone,acad
 INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
     ( 'lisi', '123456', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院');
 
-INSERT INTO `tb_passage` (`id`,`title` ,`user_name`, `description`,  `content`) VALUES
-    ('1','here is a title', 'zhangsan', 'here is description', 'here is content');
-INSERT INTO `tb_passage` (`title` ,`user_name`, `description`,  `content`) VALUES
-    ('here is a title', 'lisi', 'here is description', 'here is content');
+INSERT INTO `tb_passage` (`id`,`title` ,`user_name`, `description`,  `content`, `theme`) VALUES
+    ('1','here is a title', 'zhangsan', 'here is description', 'here is content','失物招领');
+INSERT INTO `tb_passage` (`title` ,`user_name`, `description`,  `content`,`theme`) VALUES
+    ('here is a title', 'lisi', 'here is description', 'here is content','失物招领');
 INSERT INTO `tb_theme` (`id`,  `theme`) VALUES
     ('1', '失物招领');
 INSERT INTO `tb_academy` (`id`,  `academy`) VALUES
@@ -106,10 +107,10 @@ INSERT INTO `bbs`.`tb_user` (`user_name`, `password`, `age`, `EMaIL`, `phone`, `
 INSERT INTO `bbs`.`tb_user` (`user_name`, `passwORD`, `agE`, `email`, `PHONe`, `academy`) VALUES ('slisary', '222222', '17', 'Rwydsuy@qq.com', '231321321', '计算机学院');
 
 -- passage
-INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`) VALUES ('母猪产后护理', '论母猪产后护理', 'lisa');
-INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`) VALUES ('黑暗料理之道', 'aaaaaa', 'lisay');
-INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`) VALUES ('母狗产后护理', 'bbbbb', 'lisa');
+INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('母猪产后护理', '论母猪产后护理', 'lisa','交友');
+INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('黑暗料理之道', 'aaaaaa', 'lisay','交友');
+INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('母狗产后护理', 'bbbbb', 'lisa','失物招领');
 
 -- comment
 INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `passage`, `father`) VALUES ('lisa', 'aaaaa', '1', '1');
-INSERT INTO `BBS`.`tb_comment` (`user_name`, `content`, `pASSAGE`, `Father`) VALUES ('lsl', 'bbbbb', '1', '2');
+INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `pASSAGE`, `Father`) VALUES ('lsl', 'bbbbb', '1', '2');

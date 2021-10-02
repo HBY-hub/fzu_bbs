@@ -7,6 +7,6 @@ import java.util.List;
 public interface PassageServices {
     boolean addPassage(Passage passage);
     boolean deletePassageById(Integer id);
-    List<Passage> getLatestPassage(Integer num,Integer page);
+    List<Passage> getLatestPassage(Integer num,Integer page,String theme);
     List<Passage> getPassagesByName(String passageName);
 }

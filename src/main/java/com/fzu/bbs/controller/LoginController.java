@@ -2,24 +2,25 @@ package com.fzu.bbs.controller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import com.alibaba.fastjson.JSON;
 import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.UserServices;
 import com.fzu.bbs.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 public class LoginController {
     @Autowired
     UserServices userServices;
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login")
     @ResponseBody
-    public R getLoginToken(String username,String password){
-        Integer id  = userServices.checkUser(username,password);
+    public R getLoginToken(@RequestBody Map<String,Object> args){
+        User user = JSON.parseObject(JSON.toJSONString(args),User.class);
+        Integer id  = userServices.checkUser(user.getUserName(),user.getPassword());
         if(id<0)return R.fail();
         StpUtil.login(id);
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
@@ -27,7 +28,8 @@ public class LoginController {
     }
     @GetMapping("/login")
     @ResponseBody
-    public R getUser(String token){
+    public R getUser(@RequestBody Map<String,Object> args){
+        String token = (String) args.get("token");
         Integer id = Integer.parseInt((String) StpUtil.getLoginIdByToken(token));
         User user = userServices.getUserById(id);
         if(user==null)return R.fail();

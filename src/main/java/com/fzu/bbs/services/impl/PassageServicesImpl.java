@@ -42,9 +42,10 @@ public class PassageServicesImpl implements PassageServices {
     }
 
     @Override
-    public List<Passage> getLatestPassage(Integer number,Integer page) {
+    public List<Passage> getLatestPassage(Integer number,Integer page,String theme) {
         QueryWrapper<Passage> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByAsc("update_time");
+        if(theme!=null&&theme!="")queryWrapper.eq("theme",theme);
         IPage<Passage> passageIPage = new Page<>(page,number);
         List<Passage> passageList = passageMapper.selectPage(passageIPage, queryWrapper).getRecords();
         return passageList;

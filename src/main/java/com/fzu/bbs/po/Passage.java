@@ -23,6 +23,7 @@ public class Passage {
     private Date updateTime;
     private Integer readNum;
     private String content;
+    private String theme;
     private String userName;
     private Integer likeNum;
 }
