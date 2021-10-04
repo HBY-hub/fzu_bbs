@@ -24,6 +24,12 @@ public class CommentController {
         commentServices.addComment(content, father, passageId, username);
         return R.ok();
     }
+    @GetMapping("getCommentByPassageId")
+    public R getCommentByPassageId(@RequestParam Map<String,Object> args){
+        String IdStr  = (String)  args.get("id");
+        Integer passageId = Integer.valueOf( IdStr );
+        return R.ok(commentServices.getCommentByPassageId(passageId));
+    }
 
 
 }

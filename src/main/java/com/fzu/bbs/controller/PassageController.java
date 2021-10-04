@@ -18,7 +18,7 @@ public class PassageController {
     @Autowired
     private PassageServices passageServices;
     @Autowired
-    PassageThemeServices passageThemeServices;
+    private PassageThemeServices passageThemeServices;
 
     @GetMapping("addPassage")
     @ResponseBody
@@ -39,5 +39,12 @@ public class PassageController {
         List passageList = passageServices.getLatestPassage(num,page,theme);
         if(passageList==null)return R.fail();
         return R.ok(passageList);
+    }
+    @GetMapping("getPassageById")
+    public R getPassageById(@RequestParam Map<String,Object> args){
+        String IdStr = (String) args.get("id");
+        Integer id  = Integer.valueOf(IdStr);
+        Passage passage = passageServices.getPassageById(id);
+        return R.ok(passage);
     }
 }

@@ -69,5 +69,10 @@ public class PassageServicesImpl implements PassageServices {
         return passageList;
     }
 
+    @Override
+    public Passage getPassageById(Integer id) {
+        return passageMapper.selectById(id);
+    }
+
 
 }

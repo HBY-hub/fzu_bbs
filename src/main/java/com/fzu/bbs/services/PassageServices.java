@@ -9,4 +9,5 @@ public interface PassageServices {
     boolean deletePassageById(Integer id);
     List<Passage> getLatestPassage(Integer num,Integer page,String theme);
     List<Passage> getPassagesByName(String passageName);
+    Passage getPassageById(Integer id);
 }

@@ -49,4 +49,12 @@ public class CommentServicesImpl implements CommentServices {
         List<Comment> comments = commentMapper.selectList(wrapper);
         return comments;
     }
+
+    @Override
+    public List<Comment> getCommentByPassageId(Integer passageId) {
+        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("passage",passageId);
+        List<Comment> comments = commentMapper.selectList(queryWrapper);
+        return comments;
+    }
 }
