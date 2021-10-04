@@ -5,6 +5,7 @@ import com.fzu.bbs.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -15,14 +16,14 @@ public class FollowController {
     private FollowServices followServices;
 
     @GetMapping("addFollow")
-    public R addFollow(@RequestBody Map<String,Object> args){
+    public R addFollow(@RequestParam Map<String,Object> args){
         String from = (String) args.get("from");
         String to = (String) args.get("to");
         followServices.addFollow(from,to) ;
         return R.ok();
     }
     @GetMapping("delFollow")
-    public R delFollow(@RequestBody Map<String,Object> args){
+    public R delFollow(@RequestParam Map<String,Object> args){
         String from = (String) args.get("from");
         String to = (String) args.get("to");
         followServices.deleteFollow(from,to);

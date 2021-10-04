@@ -28,7 +28,7 @@ public class LoginController {
     }
     @GetMapping("/login")
     @ResponseBody
-    public R getUser(@RequestBody Map<String,Object> args){
+    public R getUser(@RequestParam Map<String,Object> args){
         String token = (String) args.get("token");
         Integer id = Integer.parseInt((String) StpUtil.getLoginIdByToken(token));
         User user = userServices.getUserById(id);

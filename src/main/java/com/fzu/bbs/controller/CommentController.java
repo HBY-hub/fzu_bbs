@@ -5,6 +5,7 @@ import com.fzu.bbs.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -15,7 +16,7 @@ public class CommentController {
     private CommentServices commentServices;
 
     @GetMapping("addComment")
-    public R addCommnet(@RequestBody Map<String, Object> args) {
+    public R addCommnet(@RequestParam Map<String, Object> args) {
         String username = (String) args.get("username");
         String content = (String) args.get("content");
         Integer father = (Integer) args.get("father");
