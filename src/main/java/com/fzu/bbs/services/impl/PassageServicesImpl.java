@@ -8,6 +8,7 @@ import com.fzu.bbs.mapper.PassageMapper;
 import com.fzu.bbs.po.Comment;
 import com.fzu.bbs.po.Passage;
 import com.fzu.bbs.po.User;
+import com.fzu.bbs.services.ImageServices;
 import com.fzu.bbs.services.PassageServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,13 @@ public class PassageServicesImpl implements PassageServices {
     PassageMapper passageMapper;
     @Autowired
     CommentMapper commentMapper;
+    @Autowired
+    ImageServices imageServices;
 
     @Override
-    public boolean addPassage(Passage passage) {
+    public Integer addPassage(Passage passage) {
         Integer result = passageMapper.insert(passage);
-        return result>0;
+        return result;
     }
 
     @Override
@@ -49,6 +52,11 @@ public class PassageServicesImpl implements PassageServices {
             queryWrapper.eq("theme",theme);
         IPage<Passage> passageIPage = new Page<>(page,number);
         List<Passage> passageList = passageMapper.selectPage(passageIPage, queryWrapper).getRecords();
+        for(int i = 0;i<passageList.size();i++){
+            Passage newPassage =passageList.get(i);
+            newPassage.setImages(imageServices.getPassageImages(newPassage.getId()));
+            passageList.set(i,newPassage);
+        }
         return passageList;
     }
 
@@ -71,7 +79,10 @@ public class PassageServicesImpl implements PassageServices {
 
     @Override
     public Passage getPassageById(Integer id) {
-        return passageMapper.selectById(id);
+        Passage passage = passageMapper.selectById(id);
+        Passage newPassage = passage;
+        newPassage.setImages(imageServices.getPassageImages(passage.getId()));
+        return newPassage;
     }
 
 

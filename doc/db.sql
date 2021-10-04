@@ -23,17 +23,23 @@ CREATE TABLE `tb_passage` (
                            `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                            `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后一次修改时间',
                            `content` text DEFAULT NULL COMMENT '内容',
-                           `images` json DEFAULT NULL comment '图片列表',
                            `user_name` varchar(50) DEFAULT NULL COMMENT '发帖人',
                            `read_num` int(11) DEFAULT 0 COMMENT '阅读量',
                            `like_num` int(11) DEFAULT 0 comment '点赞数',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 CREATE TABLE `tb_theme` (
-                              `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-                              `theme` varchar(255) NOT NULL COMMENT '主题名',
-                              `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                              PRIMARY KEY (`id`)
+                            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+                            `theme` varchar(255) NOT NULL COMMENT '主题名',
+                            `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `tb_image` (
+                            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+                            `url` varchar(255) NOT NULL COMMENT 'url',
+                            `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                            `passage` int(11) NOT NULL COMMENT '文章',
+                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 CREATE TABLE `tb_academy` (
                             `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',

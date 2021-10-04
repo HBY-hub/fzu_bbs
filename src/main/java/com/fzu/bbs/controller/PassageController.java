@@ -3,6 +3,7 @@ package com.fzu.bbs.controller;
 import com.alibaba.fastjson.JSON;
 import com.fzu.bbs.po.Passage;
 import com.fzu.bbs.po.Theme;
+import com.fzu.bbs.services.ImageServices;
 import com.fzu.bbs.services.PassageServices;
 import com.fzu.bbs.services.PassageThemeServices;
 import com.fzu.bbs.utils.R;
@@ -19,14 +20,21 @@ public class PassageController {
     private PassageServices passageServices;
     @Autowired
     private PassageThemeServices passageThemeServices;
+    @Autowired
+    private ImageServices imageServices;
 
-    @GetMapping("addPassage")
+    @PostMapping("addPassage")
     @ResponseBody
-    public R addPassage(@RequestParam Map<String,Object> args){
+    public R addPassage(@RequestBody Map<String,Object> args){
         System.out.println(args);
         Passage passage  = JSON.parseObject(JSON.toJSONString(args),Passage.class);
         String theme = (String) args.get("theme");
-        passageServices.addPassage(passage);
+        Integer id = passageServices.addPassage(passage);
+        for(int i=0;i<((List<String>)args.get("image")).size();i++){
+//            System.out.println(((List<String>) args.get("image")).get(i));
+            imageServices.addImage(passage.getId(), ((List<String>) args.get("image")).get(i));
+        }
+
         passageThemeServices.addPassageTheme(passage.getTitle(),theme);
         return R.ok();
     }
@@ -36,7 +44,7 @@ public class PassageController {
         Integer num = Integer.valueOf(args.get("num")[0]);
         Integer page = Integer.valueOf(args.get("page")[0]);
         String theme=new String("");
-        List passageList = passageServices.getLatestPassage(num,page,theme);
+        List<Passage> passageList = passageServices.getLatestPassage(num,page,theme);
         if(passageList==null)return R.fail();
         return R.ok(passageList);
     }
