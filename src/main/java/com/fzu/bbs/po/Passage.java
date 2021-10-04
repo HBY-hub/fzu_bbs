@@ -21,6 +21,7 @@ public class Passage {
     private String description;
     private Date createTime;
     private Date updateTime;
+    private List<String> images;
     private Integer readNum;
     private String content;
     private String theme;

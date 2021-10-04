@@ -23,6 +23,7 @@ CREATE TABLE `tb_passage` (
                            `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                            `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后一次修改时间',
                            `content` text DEFAULT NULL COMMENT '内容',
+                           `images` json DEFAULT NULL comment '图片列表',
                            `user_name` varchar(50) DEFAULT NULL COMMENT '发帖人',
                            `read_num` int(11) DEFAULT 0 COMMENT '阅读量',
                            `like_num` int(11) DEFAULT 0 comment '点赞数',
