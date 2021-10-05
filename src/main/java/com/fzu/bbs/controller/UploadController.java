@@ -2,6 +2,8 @@ package com.fzu.bbs.controller;
 
 import com.fzu.bbs.utils.AliyunOSSUtil;
 import com.fzu.bbs.utils.R;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.io.FileOutputStream;
 import java.util.Map;
 
 @RestController("/oss")
+@Api(tags={"Upload"})
 public class UploadController {
     @Autowired
     private AliyunOSSUtil aliyunOSSUtil;
@@ -23,6 +26,7 @@ public class UploadController {
     }
 
     @PostMapping("/ossUpload")
+    @ApiOperation("上传BlogPost")
     public R toUploadBlogPost(MultipartFile file) {
         try {
             if (null != file) {

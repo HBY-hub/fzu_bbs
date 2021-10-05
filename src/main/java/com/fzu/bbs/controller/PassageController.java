@@ -7,6 +7,8 @@ import com.fzu.bbs.services.ImageServices;
 import com.fzu.bbs.services.PassageServices;
 import com.fzu.bbs.services.PassageThemeServices;
 import com.fzu.bbs.utils.R;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Api(tags = {"Passage"})
 public class PassageController {
     @Autowired
     private PassageServices passageServices;
@@ -25,6 +28,7 @@ public class PassageController {
 
     @PostMapping("addPassage")
     @ResponseBody
+    @ApiOperation("增加一篇文章")
     public R addPassage(@RequestBody Map<String,Object> args){
         System.out.println(args);
         Passage passage  = JSON.parseObject(JSON.toJSONString(args),Passage.class);
@@ -38,6 +42,9 @@ public class PassageController {
         passageThemeServices.addPassageTheme(passage.getTitle(),theme);
         return R.ok();
     }
+
+
+    @ApiOperation("得到最新文章")
     @GetMapping("getHotPassage")
     public R getHotPassage(HttpServletRequest httpRequest){
         Map<String, String[]> args = httpRequest.getParameterMap();
@@ -48,6 +55,9 @@ public class PassageController {
         if(passageList==null)return R.fail();
         return R.ok(passageList);
     }
+
+
+    @ApiOperation("通过id得到文章")
     @GetMapping("getPassageById")
     public R getPassageById(@RequestParam Map<String,Object> args){
         String IdStr = (String) args.get("id");
