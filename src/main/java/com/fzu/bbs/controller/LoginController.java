@@ -49,7 +49,9 @@ public class LoginController {
     @GetMapping("/logout")
     @ApiOperation("注销账号")
     public R logOut(){
-        StpUtil.logout();
+        if(StpUtil.isLogin()){
+            StpUtil.logout();
+        }
         return R.ok();
     }
 
