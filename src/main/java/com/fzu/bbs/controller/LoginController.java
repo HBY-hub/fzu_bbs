@@ -21,7 +21,12 @@ public class LoginController {
     public R getLoginToken(@RequestBody Map<String,Object> args){
         User user = JSON.parseObject(JSON.toJSONString(args),User.class);
         Integer id  = userServices.checkUser(user.getUserName(),user.getPassword());
-        if(id<0)return R.fail();
+        if(id==0){
+            return R.fail("用户不存在");
+        }
+        if(id<0){
+            return R.fail("密码错误");
+        }
         StpUtil.login(id);
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return R.ok(tokenInfo);

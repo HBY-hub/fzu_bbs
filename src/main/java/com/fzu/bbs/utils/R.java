@@ -50,6 +50,10 @@ public class R<T> implements Serializable {
         return createResult(code, message, null);
     }
 
+    public static <T> R<T> fail(String messege){
+        return createResult(ResponseCode.FAIL.getCode(), messege,null);
+    }
+
     private static <T> R<T> createResult(Integer code, String message, T data) {
         R<T> r = new R<>();
         r.setCode(code);

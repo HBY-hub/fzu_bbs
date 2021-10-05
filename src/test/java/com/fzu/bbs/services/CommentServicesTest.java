@@ -1,4 +1,4 @@
-package com.fzu.bbs;
+package com.fzu.bbs.services;
 
 import com.fzu.bbs.services.CommentServices;
 import org.junit.jupiter.api.Test;
