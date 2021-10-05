@@ -47,7 +47,6 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    @ResponseBody
     @ApiOperation("注销账号")
     public R logOut(){
         StpUtil.logout();
