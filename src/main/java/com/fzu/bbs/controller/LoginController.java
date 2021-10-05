@@ -46,4 +46,12 @@ public class LoginController {
         return R.ok(user);
     }
 
+    @GetMapping("/logout")
+    @ResponseBody
+    @ApiOperation("注销账号")
+    public R logOut(){
+        StpUtil.logout();
+        return R.ok();
+    }
+
 }
