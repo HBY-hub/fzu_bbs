@@ -65,7 +65,11 @@ public class UserServicesImpl implements UserServices {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name",username);
         User user = userMapper.selectOne(queryWrapper);
-        if(user==null||!user.getPassword().equals(password))return -1;
+
+        if(user==null){
+            return 0;
+        }
+        if(!user.getPassword().equals(password))return -1;
         return user.getId();
     }
 }
