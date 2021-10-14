@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
@@ -22,7 +23,7 @@ public class LoginController {
     @PostMapping(value = "/login")
     @ResponseBody
     @ApiOperation("登录")
-    public R getLoginToken(@RequestBody Map<String,Object> args){
+    public R getLoginToken(@RequestBody Map<String,Object> args, HttpSession session){
         User user = JSON.parseObject(JSON.toJSONString(args),User.class);
         Integer id  = userServices.checkUser(user.getUserName(),user.getPassword());
         if(id==0){
@@ -32,6 +33,7 @@ public class LoginController {
             return R.fail("密码错误");
         }
         StpUtil.login(id);
+        session.setAttribute("user",userServices.getUserById(id));
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return R.ok(tokenInfo);
     }
