@@ -28,6 +28,7 @@ public class PassageServicesTest {
         passage.setContent("test");
         passage.setUserName("user");
         passage.setDescription("des");
+        passage.setTheme("失物招领");
         passage.setTitle("tttitle");
         passageServices.addPassage(passage);
 

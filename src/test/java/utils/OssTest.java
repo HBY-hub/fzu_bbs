@@ -15,10 +15,10 @@ public class OssTest {
     @Autowired
     private AliyunOSSUtil aliyunOSSUtil;
 
-    @Test
-    public void testOss(){
-        File file = new File("C:\\Users\\HBY\\Desktop\\test.jpg");
-        System.out.println(aliyunOSSUtil.uploadFile(file));
-    }
+//    @Test
+//    public void testOss(){
+//        File file = new File("C:\\Users\\HBY\\Desktop\\test.jpg");
+//        System.out.println(aliyunOSSUtil.uploadFile(file));
+//    }
 
 }

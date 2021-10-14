@@ -12,7 +12,7 @@ CREATE TABLE `tb_user` (
                            `phone` varchar(50) DEFAULT NULL COMMENT '手机',
                            `academy` varchar(50) DEFAULT NULL COMMENT '学院',
                            `avatar` varchar(100) DEFAULT NULL comment '头像url',
-                           `face_data` json DEFAULT NULL comment '脸部数据',
+                           `face_data` varchar(1000) DEFAULT NULL comment '脸部数据',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 CREATE TABLE `tb_passage` (

@@ -29,5 +29,5 @@ public class User {
     private String phone;
     private String academy;
     private String avatar;
-    private List<Integer> faceData = new ArrayList<>();
+    private String faceData;
 }
