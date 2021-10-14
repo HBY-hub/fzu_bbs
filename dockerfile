@@ -1,4 +1,4 @@
-FROM java:11
+FROM adoptopenjdk/openjdk11:alpine
 # 作者
 MAINTAINER hby
 # VOLUME 指定了临时文件目录为/tmp。
