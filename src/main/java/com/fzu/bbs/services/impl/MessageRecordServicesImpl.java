@@ -79,4 +79,12 @@ public class MessageRecordServicesImpl implements MessageRecordServices {
         }
         return true;
     }
+
+    @Override
+    public boolean addMessageRecord(Integer fromUserId, Integer toUserId, String addMessage) {
+        MessageRecord messageRecord = getMessageRecord(fromUserId,toUserId);
+        messageRecord.setMessage(messageRecord.getMessage()+addMessage);
+        updateMessageRecord(messageRecord);
+        return true;
+    }
 }

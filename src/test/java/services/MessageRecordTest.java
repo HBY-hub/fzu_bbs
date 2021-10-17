@@ -18,8 +18,6 @@ public class MessageRecordTest {
 
     @Test
     public void test1(){
-        messageRecordServices.clearMessageRecord(3,1);
-
-        System.out.println(messageRecordServices.getMessageRecord(3, 1));
+        messageRecordServices.addMessageRecord(1,2,"aa");
     }
 }

@@ -12,4 +12,6 @@ public interface MessageRecordServices {
     boolean updateMessageRecord(MessageRecord messageRecord);
     //如果不存在记录用这个创建
     boolean createMessageRecord(Integer fromUserId,Integer toUserId);
+    //追加聊天记录
+    boolean addMessageRecord(Integer fromUserId,Integer toUserId,String addMessage);
 }
