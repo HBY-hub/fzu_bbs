@@ -11,7 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {com.fzu.bbs.BbsApplication.class})
+@SpringBootTest(classes = {com.fzu.bbs.BbsApplication.class},webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PassageServicesTest {
     @Autowired
     PassageServices passageServices;

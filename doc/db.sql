@@ -121,3 +121,15 @@ INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VAL
 -- comment
 INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `passage`, `father`) VALUES ('lisa', 'aaaaa', '1', '1');
 INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `pASSAGE`, `Father`) VALUES ('lsl', 'bbbbb', '1', '2');
+
+-- 创建新表，存储聊天记录
+USE bbs;
+CREATE TABLE `tb_message_record` (
+                                     `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+                                     `from_user_id` BIGINT(20) NOT NULL COMMENT '发送者id',
+                                     `to_user_id` BIGINT(20) NOT NULL COMMENT '接受者id',
+                                     `message` TEXT COMMENT '聊天记录',
+                                     `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                     `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+                                     PRIMARY KEY(`id`)
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
