@@ -124,12 +124,13 @@ INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `pASSAGE`, `Father`) VAL
 
 -- 创建新表，存储聊天记录
 USE bbs;
+DROP TABLE IF EXISTS tb_message_record;
 CREATE TABLE `tb_message_record` (
                                      `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
                                      `from_user_id` BIGINT(20) NOT NULL COMMENT '发送者id',
                                      `to_user_id` BIGINT(20) NOT NULL COMMENT '接受者id',
                                      `message` TEXT COMMENT '聊天记录',
+                                     `is_file` TINYINT DEFAULT 0 COMMENT '是否为文件/图片',
                                      `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                     `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
                                      PRIMARY KEY(`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
