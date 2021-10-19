@@ -24,6 +24,20 @@ public class MessageRecordServicesImpl implements MessageRecordServices {
         wrapper
                 .eq("from_user_id",fromUserId)
                 .eq("to_user_id",toUserId)
+                .or()
+                .eq("from_user_id",toUserId)
+                .eq("to_user_id",fromUserId)
+                .orderByAsc("create_time");
+        List<MessageRecord> messageRecordList = messageRecordMapper.selectList(wrapper);
+        return messageRecordList;
+    }
+
+    @Override
+    public List<MessageRecord> getUnreadMessage(Integer toUserId) {
+        QueryWrapper<MessageRecord> wrapper = new QueryWrapper<>();
+        wrapper
+                .eq("to_user_id",toUserId)
+                .eq("is_read",false)
                 .orderByAsc("create_time");
         List<MessageRecord> messageRecordList = messageRecordMapper.selectList(wrapper);
         return messageRecordList;
