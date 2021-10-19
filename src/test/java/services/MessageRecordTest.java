@@ -21,26 +21,26 @@ public class MessageRecordTest {
 
     @Test
     public void test1(){
-        messageRecordServices.addMessageRecord(1,2,"aa");
+//        messageRecordServices.addMessageRecord(1,2,"aa");
     }
 
     @Test
     public void test2() throws Exception{
-        messageRecordServices.addMessageRecord(1,2,"111");
+        messageRecordServices.addMessageRecord(1,2,"111",true);
         Thread.currentThread().sleep(1);
-        messageRecordServices.addMessageRecord(1,2,"222");
+        messageRecordServices.addMessageRecord(1,2,"222",true);
         Thread.currentThread().sleep(1);
-        messageRecordServices.addMessageRecord(1,2,"333");
+        messageRecordServices.addMessageRecord(1,2,"333",true);
         Thread.currentThread().sleep(1);
-        messageRecordServices.addMessageRecord(2,1,"444");
+        messageRecordServices.addMessageRecord(2,1,"444",true);
         Thread.currentThread().sleep(1);
-        messageRecordServices.addMessageRecord(2,1,"555");
+        messageRecordServices.addMessageRecord(2,1,"555",true);
         Thread.currentThread().sleep(1);
-        messageRecordServices.addMessageRecord(1,2,"666");
+        messageRecordServices.addMessageRecord(1,2,"666",true);
         Thread.currentThread().sleep(1);
-        messageRecordServices.addMessageRecord(2,1,"777");
+        messageRecordServices.addMessageRecord(2,1,"777",true);
         Thread.currentThread().sleep(1);
-        messageRecordServices.addMessageRecord(1,2,"888");
+        messageRecordServices.addMessageRecord(1,2,"888",true);
     }
 
     @Test

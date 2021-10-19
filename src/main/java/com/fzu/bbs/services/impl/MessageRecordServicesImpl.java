@@ -55,11 +55,12 @@ public class MessageRecordServicesImpl implements MessageRecordServices {
         else return true;
     }
     @Override
-    public boolean addMessageRecord(Integer fromUserId, Integer toUserId, String messageContext) {
+    public boolean addMessageRecord(Integer fromUserId, Integer toUserId, String messageContext,Boolean isRead) {
         MessageRecord messageRecord = new MessageRecord();
         messageRecord.setFromUserId(fromUserId);
         messageRecord.setToUserId(toUserId);
         messageRecord.setMessage(messageContext);
+        messageRecord.setIsRead(isRead);
 
         int clums = messageRecordMapper.insert(messageRecord);
         if (clums > 0) return true;
@@ -67,12 +68,13 @@ public class MessageRecordServicesImpl implements MessageRecordServices {
     }
 
     @Override
-    public boolean addFileRecord(Integer fromUserId, Integer toUserId, String messageContext) {
+    public boolean addFileRecord(Integer fromUserId, Integer toUserId, String messageContext,Boolean isRead) {
         MessageRecord messageRecord = new MessageRecord();
         messageRecord.setFromUserId(fromUserId);
         messageRecord.setToUserId(toUserId);
         messageRecord.setMessage(messageContext);
         messageRecord.setIsFile(true);
+        messageRecord.setIsRead(isRead);
 
         int clums = messageRecordMapper.insert(messageRecord);
         if (clums > 0) return true;
@@ -82,6 +84,16 @@ public class MessageRecordServicesImpl implements MessageRecordServices {
     @Override
     public boolean deleteMessageRecord(Integer messageRecordId) {
         int clums = messageRecordMapper.deleteById(messageRecordId);
+        if (clums > 0) return true;
+        else return false;
+    }
+
+    @Override
+    public boolean setMessageReaded(Integer messageId) {
+        UpdateWrapper wrapper = new UpdateWrapper();
+        MessageRecord messageRecord = new MessageRecord();
+        messageRecord.setIsRead(true);
+        int clums = messageRecordMapper.updateById(messageRecord);
         if (clums > 0) return true;
         else return false;
     }
