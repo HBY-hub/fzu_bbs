@@ -1,5 +1,6 @@
 package com.fzu.bbs.ws;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fzu.bbs.po.MessageRecord;
 import com.fzu.bbs.po.User;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import springfox.documentation.service.ApiListing;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
@@ -18,15 +20,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@ServerEndpoint(value = "/chat", configurator = GetHttpSessionConfigurator.class)
+@ServerEndpoint(value = "/chat")//, configurator = GetHttpSessionConfigurator.class
 @Component
 public class ChatEndpoint {
     //存放当前在线的用户
     public static Map<Integer,ChatEndpoint> userList = new ConcurrentHashMap<>();
     //当前用户的session
     public Session session;
-    //当前用户的httpsession
-    public HttpSession httpSession;
 
     @Autowired
     MessageRecordServices messageRecordServices;
@@ -37,9 +37,8 @@ public class ChatEndpoint {
         this.session = session;
         //获取httpsession
         HttpSession httpSession = (HttpSession) endpointConfig.getUserProperties().get(HttpSession.class.getName());
-        this.httpSession = httpSession;
         //得到User
-        User user = (User) httpSession.getAttribute("user");
+        User user = (User) StpUtil.getSession().get("user");
         //将此用户的所有未读信息发送给该用户
         List<MessageRecord> messageRecordList = messageRecordServices.getUnreadMessage(user.getId());
         for (MessageRecord record : messageRecordList) {
@@ -85,7 +84,7 @@ public class ChatEndpoint {
 
     @OnClose
     public void Onclose(Session session) {
-        User user = (User) httpSession.getAttribute("user");
+        User user = (User) StpUtil.getSession().get("user");
         //不在线则移出userList
         userList.remove(user.getId());
     }
