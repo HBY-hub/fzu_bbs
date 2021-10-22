@@ -15,12 +15,13 @@ import springfox.documentation.service.ApiListing;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@ServerEndpoint(value = "/chat")//, configurator = GetHttpSessionConfigurator.class
+@ServerEndpoint(value = "/chat/{sid}")//, configurator = GetHttpSessionConfigurator.class
 @Component
 public class ChatEndpoint {
     //存放当前在线的用户
@@ -28,19 +29,19 @@ public class ChatEndpoint {
     //当前用户的session
     public Session session;
 
+    public Integer userId;
+
     @Autowired
     MessageRecordServices messageRecordServices;
 
     @OnOpen
-    public void OnOpen(Session session, EndpointConfig endpointConfig){
+    public void OnOpen(Session session, EndpointConfig endpointConfig,@PathParam("sid") String sid){
         //获取session
         this.session = session;
-        //获取httpsession
-        HttpSession httpSession = (HttpSession) endpointConfig.getUserProperties().get(HttpSession.class.getName());
-        //得到User
-        User user = (User) StpUtil.getSession().get("user");
+        //当前用户id
+        this.userId = Integer.valueOf(sid);
         //将此用户的所有未读信息发送给该用户
-        List<MessageRecord> messageRecordList = messageRecordServices.getUnreadMessage(user.getId());
+        List<MessageRecord> messageRecordList = messageRecordServices.getUnreadMessage(userId);
         for (MessageRecord record : messageRecordList) {
             //设置消息已读
             messageRecordServices.setMessageReaded(record.getId());
@@ -54,7 +55,7 @@ public class ChatEndpoint {
             }
         }
         //把自己加入map
-        userList.put(user.getId(),this);
+        userList.put(userId,this);
     }
 
 
@@ -84,9 +85,8 @@ public class ChatEndpoint {
 
     @OnClose
     public void Onclose(Session session) {
-        User user = (User) StpUtil.getSession().get("user");
         //不在线则移出userList
-        userList.remove(user.getId());
+        userList.remove(userId);
     }
 
 }

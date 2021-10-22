@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.Map;
 
 @RestController
@@ -33,7 +34,7 @@ public class LoginController {
             return R.fail("密码错误");
         }
         StpUtil.login(id);
-        StpUtil.getSession().set("user",user);
+
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return R.ok(tokenInfo);
     }

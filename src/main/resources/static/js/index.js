@@ -5,7 +5,7 @@ function login() {
     data['password'] = $('#pwd').val();
     $.ajaxSetup({contentType: "application/json; charset=utf-8"})
     $.post("login", JSON.stringify(data), function (res) {
-        if (res.flag){
+        if (res.code == 200){
             location.href = 'toChatroom';
         }else {
             alert(JSON.stringify(res));

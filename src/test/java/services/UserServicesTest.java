@@ -22,4 +22,14 @@ public class UserServicesTest {
         userList.forEach(System.out::println);
 
     }
+
+    @Test
+    public void test1(){
+        User user = new User();
+        user.setUserName("qiuxinhan");
+        user.setPassword("123456");
+        user.setEmail("120975969@qq.com");
+        user.setPhone("13174549517");
+        userServices.addUser(user);
+    }
 }

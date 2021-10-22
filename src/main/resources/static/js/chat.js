@@ -15,13 +15,14 @@ $(function () {
         url: "/getUser",
         success : function (res) {
             var jsonData = JSON.parse(res);
+            alert(jsonData);
             username = jsonData.username;
             userId = jsonData.id;
             $('#chatMeu').html('<p>用户：' + userId + "<span style='float: right;color: greenyellow; height: 20px'>在线</span></p>")
         }
     });
     //创建websocket对象
-    var ws = new WebSocket("ws://localhost:8080/chat");
+    var ws = new WebSocket("ws://localhost:8080/chat/"+userId.toString());
 
     //建立连接后触发
     ws.onopen = function () {
