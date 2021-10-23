@@ -12,7 +12,7 @@ public class WebsocketUtil {
 
         resultMessege.setToUserId(toUserId);
         resultMessege.setFromUserId(fromUserId);
-        resultMessege.setMessege(messege);
+        resultMessege.setMessage(messege);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String repStr = null;

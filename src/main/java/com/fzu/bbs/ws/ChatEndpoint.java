@@ -1,8 +1,10 @@
 package com.fzu.bbs.ws;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fzu.bbs.po.MessageRecord;
+import com.fzu.bbs.po.Passage;
 import com.fzu.bbs.po.User;
 import com.fzu.bbs.po.ws.ReceiveMessege;
 import com.fzu.bbs.services.MessageRecordServices;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -68,26 +71,27 @@ public class ChatEndpoint {
 
     @OnMessage
     public void OnMessege(String receiveMessegeStr,Session session){
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            //得到receiveMessege
-            ReceiveMessege receiveMessege = objectMapper.readValue(receiveMessegeStr,ReceiveMessege.class);
 
-            if (userList.containsKey(receiveMessege.getToUserId())){//如果消息的接受者当前在线的话
-                //将消息存进数据库,同时将这条消息设置为已读
-                messageRecordServices.addMessageRecord(receiveMessege.getFromUserId(), receiveMessege.getToUserId(), receiveMessege.getMessege(),true);
-                //封装消息
-                String res = WebsocketUtil.getResultMessege(receiveMessege.getFromUserId(),receiveMessege.getToUserId(),receiveMessege.getMessege());
-                //发送消息
+//        ReceiveMessege receiveMessege = objectMapper.readValue(receiveMessegeStr,ReceiveMessege.class);
+        ReceiveMessege receiveMessege  = JSON.parseObject(receiveMessegeStr,ReceiveMessege.class);
+
+        if (userList.containsKey(receiveMessege.getToUserId())){//如果消息的接受者当前在线的话
+            //将消息存进数据库,同时将这条消息设置为已读
+            messageRecordServices.addMessageRecord(receiveMessege.getFromUserId(), receiveMessege.getToUserId(), receiveMessege.getMessage(),true);
+            //封装消息
+            String res = WebsocketUtil.getResultMessege(receiveMessege.getFromUserId(),receiveMessege.getToUserId(),receiveMessege.getMessage());
+            //发送消息
+            try {
                 userList.get(receiveMessege.getToUserId()).session.getBasicRemote().sendText(res);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            else {//不在线
-                //将消息存进数据库，同时将这条消息设置为未读
-                messageRecordServices.addMessageRecord(receiveMessege.getFromUserId(), receiveMessege.getToUserId(), receiveMessege.getMessege(),false);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
         }
+        else {//不在线
+            //将消息存进数据库，同时将这条消息设置为未读
+            messageRecordServices.addMessageRecord(receiveMessege.getFromUserId(), receiveMessege.getToUserId(), receiveMessege.getMessage(),false);
+        }
+
     }
 
     @OnClose

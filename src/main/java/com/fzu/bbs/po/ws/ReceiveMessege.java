@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 public class ReceiveMessege {
     Integer fromUserId;
     Integer toUserId;
-    String messege;
+    String message;
 }
