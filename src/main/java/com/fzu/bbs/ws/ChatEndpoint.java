@@ -6,6 +6,7 @@ import com.fzu.bbs.po.MessageRecord;
 import com.fzu.bbs.po.User;
 import com.fzu.bbs.po.ws.ReceiveMessege;
 import com.fzu.bbs.services.MessageRecordServices;
+import com.fzu.bbs.services.PassageServices;
 import com.fzu.bbs.utils.WebsocketUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.service.ApiListing;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -32,7 +34,12 @@ public class ChatEndpoint {
     public Integer userId;
 
     @Autowired
-    MessageRecordServices messageRecordServices;
+    static MessageRecordServices messageRecordServices;
+
+    @Autowired
+    public void setMessageRecordServices(MessageRecordServices messageRecordServices){
+        ChatEndpoint.messageRecordServices = messageRecordServices;
+    }
 
     @OnOpen
     public void OnOpen(Session session, EndpointConfig endpointConfig,@PathParam("sid") String sid){
