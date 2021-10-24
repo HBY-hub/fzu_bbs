@@ -7,12 +7,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fzu.bbs.po.MessageRecord;
 import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.MessageRecordServices;
+import com.fzu.bbs.services.UserServices;
 import com.fzu.bbs.utils.R;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -25,6 +27,8 @@ public class ChatController {
 
     @Autowired
     MessageRecordServices messageRecordServices;
+    @Autowired
+    UserServices userServices;
 
     @GetMapping("/getMessageRecord")
     public R getMessageRecord(@RequestBody Map<String,Object> args){
@@ -41,11 +45,10 @@ public class ChatController {
 
     @GetMapping("/getUser")
     @ResponseBody
-    public String getUser() throws JsonProcessingException{
-        System.out.println("get User!!");
-        User user = (User) StpUtil.getSession().get("user");
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(user);
+    public User getUser(@RequestParam Map<String, Object> args) throws JsonProcessingException{
+        Integer id = Integer.valueOf((String) args.get("id"));
+        User user = userServices.getUserById(id);
+        return user;
     }
 
 }
