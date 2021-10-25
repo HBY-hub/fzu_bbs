@@ -1,6 +1,9 @@
 package com.fzu.bbs.controller;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.UserServices;
 import com.fzu.bbs.utils.R;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
@@ -48,7 +51,78 @@ public class FaceLoginController {
             HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(param,headers);
 
             String body = restTemplate.postForEntity(url, httpEntity, String.class).getBody();
+            body = body.substring(1,body.length()-1);
+            User user = userServices.checkFace(body);
+            if(user!=null){
+                StpUtil.login(user.getId());
+                SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+                return R.ok(tokenInfo);
+            }else{
+                return R.fail();
+            }
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        } finally {
+            image.delete();
+        }
+        return null;
+    }
+
+    @PostMapping("/faceUpload")
+    public R faceUpload(MultipartFile file,Integer userId) throws Exception {
+        final String url = "http://192.168.230.88:8000/uploadfile";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        File image = multipartFileToFile(file, "D:\\");
+
+        try {
+            FileSystemResource resource = new FileSystemResource(image);
+            MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
+            param.add("file", resource);
+            //使用HttpEntity构建需要传递的参数
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            headers.add("Accept","application/json");
+            HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(param,headers);
+
+            String body = restTemplate.postForEntity(url, httpEntity, String.class).getBody();
+            body = body.substring(1,body.length()-1);
+            userServices.updateUserFace(userId,body);
             return R.ok(body,"ok");
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        } finally {
+            image.delete();
+        }
+        return null;
+    }
+    @PostMapping("/faceCheck")
+    public R faceCheck(MultipartFile file) throws Exception {
+        final String url = "http://192.168.230.88:8000/uploadfile";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        File image = multipartFileToFile(file, "D:\\");
+
+        try {
+            FileSystemResource resource = new FileSystemResource(image);
+            MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
+            param.add("file", resource);
+            //使用HttpEntity构建需要传递的参数
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            headers.add("Accept","application/json");
+            HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(param,headers);
+
+            String body = restTemplate.postForEntity(url, httpEntity, String.class).getBody();
+            body = body.substring(1,body.length()-1);
+
+            User user = userServices.checkFace(body);
+            if(user!=null)
+            return R.ok(body,"ok");
+            else
+                return R.fail();
         } catch (RestClientException e) {
             e.printStackTrace();
         } finally {

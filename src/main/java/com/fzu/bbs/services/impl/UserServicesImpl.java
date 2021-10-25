@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fzu.bbs.mapper.UserMapper;
 import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.UserServices;
+import com.fzu.bbs.utils.CheckFace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +72,25 @@ public class UserServicesImpl implements UserServices {
         }
         if(!user.getPassword().equals(password))return -1;
         return user.getId();
+    }
+
+    @Override
+    public void updateUserFace(Integer userId, String faceData) {
+        User user = userMapper.selectById(userId);
+        user.setFaceData(faceData);
+        userMapper.updateById(user);
+    }
+
+    @Override
+    public User checkFace(String face) {
+        List<User> userList = userMapper.selectList(new QueryWrapper<>());
+        for(int i =0;i<userList.size();i++){
+            if(userList.get(i).getFaceData()==null)continue;
+            if(CheckFace.check(face,userList.get(i).getFaceData())){
+                return userList.get(i);
+            }
+        }
+        return null;
+
     }
 }

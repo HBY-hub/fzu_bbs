@@ -50,7 +50,7 @@ public class PassageController {
         Map<String, String[]> args = httpRequest.getParameterMap();
         Integer num = Integer.valueOf(args.get("num")[0]);
         Integer page = Integer.valueOf(args.get("page")[0]);
-        String theme=new String("");
+        String theme=args.get("theme")[0];
         List<Passage> passageList = passageServices.getLatestPassage(num,page,theme);
         if(passageList==null)return R.fail();
         return R.ok(passageList);

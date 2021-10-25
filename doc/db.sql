@@ -12,7 +12,7 @@ CREATE TABLE `tb_user` (
                            `phone` varchar(50) DEFAULT NULL COMMENT '手机',
                            `academy` varchar(50) DEFAULT NULL COMMENT '学院',
                            `avatar` varchar(100) DEFAULT NULL comment '头像url',
-                           `face_data` varchar(1000) DEFAULT NULL comment '脸部数据',
+                           `face_data` text DEFAULT NULL comment '脸部数据',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 CREATE TABLE `tb_passage` (
@@ -82,6 +82,12 @@ INSERT INTO `tb_user` (`id`, `user_name`, `password`,  `age`, `email`,phone,acad
 
 INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
     ( 'lisi', '123456', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院');
+
+INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
+    ( 'a', 'a', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院');
+
+INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
+    ( 'b', 'b', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院');
 
 INSERT INTO `tb_passage` (`id`,`title` ,`user_name`, `description`,  `content`, `theme`) VALUES
     ('1','here is a title', 'zhangsan', 'here is description', 'here is content','失物招领');

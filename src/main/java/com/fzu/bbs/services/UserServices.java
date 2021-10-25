@@ -10,4 +10,6 @@ public interface UserServices {
     User getUserById(Integer id);
     List<User> getUserByName(String username);
     Integer checkUser(String username,String password);
+    void updateUserFace(Integer userId,String faceData);
+    User checkFace(String face);
 }
