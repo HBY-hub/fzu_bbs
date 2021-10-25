@@ -51,4 +51,11 @@ public class ChatController {
         return user;
     }
 
+    @GetMapping("/getUserByName")
+    @ResponseBody
+    public User getUserByName(@RequestParam Map<String, Object> args) throws JsonProcessingException{
+        User user = userServices.getUserByName((String) args.get("username")).get(0);
+        return user;
+    }
+
 }
