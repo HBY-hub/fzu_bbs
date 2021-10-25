@@ -68,7 +68,6 @@ public class FaceLoginController {
         return null;
     }
 
-
     @PostMapping("/faceUpload")
     public R faceUpload(MultipartFile file,Integer userId) throws Exception {
         final String url = "http://192.168.230.88:8000/uploadfile";
