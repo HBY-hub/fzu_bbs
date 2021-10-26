@@ -77,7 +77,7 @@ public class FaceLoginController {
 
     @PostMapping("/faceUpload")
     public R faceUpload(MultipartFile file,Integer userId) throws Exception {
-        final String url = "http://192.168.230.88:8000/uploadfile";
+        final String url = faceUrl+"/uploadfile";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -106,7 +106,7 @@ public class FaceLoginController {
     }
     @PostMapping("/faceCheck")
     public R faceCheck(MultipartFile file) throws Exception {
-        final String url = "http://192.168.230.88:8000/uploadfile";
+        final String url = faceUrl+"/uploadfile";
 
         RestTemplate restTemplate = new RestTemplate();
 
