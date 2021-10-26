@@ -8,6 +8,7 @@ import com.fzu.bbs.services.UserServices;
 import com.fzu.bbs.utils.R;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
@@ -32,13 +33,18 @@ public class FaceLoginController {
     @Autowired
     private UserServices userServices;
 
+    @Value("${face.url}")
+    private String faceUrl;
+    @Value("${faceLoc}")
+    private String faceLoc
+
     @PostMapping("/faceLogin")
     public R faceLogin(MultipartFile file) throws Exception {
-        final String url = "http://192.168.230.88:8000/uploadfile";
+        final String url = faceUrl+"/uploadfile";
 
         RestTemplate restTemplate = new RestTemplate();
 
-        File image = multipartFileToFile(file, "D:\\");
+        File image = multipartFileToFile(file, faceLoc);
 
         try {
             FileSystemResource resource = new FileSystemResource(image);
