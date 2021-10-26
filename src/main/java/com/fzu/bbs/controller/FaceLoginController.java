@@ -36,7 +36,7 @@ public class FaceLoginController {
     @Value("${face.url}")
     private String faceUrl;
     @Value("${faceLoc}")
-    private String faceLoc
+    private String faceLoc;
 
     @PostMapping("/faceLogin")
     public R faceLogin(MultipartFile file) throws Exception {
