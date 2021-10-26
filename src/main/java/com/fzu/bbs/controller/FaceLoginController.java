@@ -35,7 +35,7 @@ public class FaceLoginController {
 
     @Value("${face.url}")
     private String faceUrl;
-    @Value("${faceLoc}")
+    @Value("${face.location}")
     private String faceLoc;
 
     @PostMapping("/faceLogin")
