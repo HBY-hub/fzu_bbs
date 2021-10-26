@@ -20,7 +20,7 @@ public class Comment {
     private Integer id;
     private Integer father;
     private Integer passage;
-    private String user_name;
+    private String userName;
     private String content;
     private Date createTime;
 }

@@ -49,7 +49,7 @@ CREATE TABLE `tb_academy` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 CREATE TABLE `tb_comment` (
                               `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-                              `user_name` varchar(255) NOT NULL COMMENT '学院名',
+                              `user_name` varchar(255) NOT NULL COMMENT '用户名',
                               `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                               `content` varchar(255) NOT NULL comment '评论内容',
                               `passage` int(11) not null comment '所属文章',
@@ -77,11 +77,11 @@ CREATE TABLE `tb_passage_theme` (
 
 
 
-INSERT INTO `tb_user` (`id`, `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
-    ('1', 'zhangsan', '123456', '18', 'test1@itcast.cn','111111111','计算机学院');
+INSERT INTO `tb_user` (`id`, `user_name`, `password`,  `age`, `email`,phone,academy,avatar) VALUES
+    ('1', 'zhangsan', '123456', '18', 'test1@itcast.cn','111111111','计算机学院','https://hby-test.oss-cn-guangzhou.aliyuncs.com/WPS%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91.png');
 
-INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
-    ( 'lisi', '123456', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院');
+INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy,avatar) VALUES
+    ( 'lisi', '123456', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院','https://hby-test.oss-cn-guangzhou.aliyuncs.com/WPS%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91.png');
 
 INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
     ( 'a', 'a', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院');
@@ -89,16 +89,24 @@ INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) 
 INSERT INTO `tb_user` ( `user_name`, `password`,  `age`, `email`,phone,academy) VALUES
     ( 'b', 'b', '182', 'test1@dsfljitcast.cn','11dsfs1111111','计算机学院');
 
-INSERT INTO `tb_passage` (`id`,`title` ,`user_name`, `description`,  `content`, `theme`) VALUES
-    ('1','here is a title', 'zhangsan', 'here is description', 'here is content','失物招领');
+INSERT INTO `tb_passage` (`title` ,`user_name`, `description`,  `content`, `theme`) VALUES
+    ('here is a title', 'zhangsan', 'here is description', 'here is content','失物招领');
+INSERT INTO `tb_image` (url, passage) values
+    ('https://hby-test.oss-cn-guangzhou.aliyuncs.com/WPS%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91.png',1)
+INSERT INTO `tb_image` (url, passage) values
+    ('https://hby-test.oss-cn-guangzhou.aliyuncs.com/WPS%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91.png',1)
+INSERT INTO `tb_image` (url, passage) values
+    ('https://hby-test.oss-cn-guangzhou.aliyuncs.com/WPS%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91.png',1)
+INSERT INTO `tb_comment`(user_name, content, passage) values ('zhangsan','好啊',1);
+INSERT INTO `tb_comment`(user_name, content, passage) values ('zhangsan','好啊',1);
+INSERT INTO `tb_comment`(user_name, content, passage) values ('zhangsan','好啊',1);
 INSERT INTO `tb_passage` (`title` ,`user_name`, `description`,  `content`,`theme`) VALUES
     ('here is a title', 'lisi', 'here is description', 'here is content','失物招领');
 INSERT INTO `tb_theme` (`id`,  `theme`) VALUES
     ('1', '失物招领');
 INSERT INTO `tb_academy` (`id`,  `academy`) VALUES
     ('1', '计算机学院');
-INSERT INTO `tb_comment` (`id`,  `user_name`, `content`,`passage`) VALUES
-    ('1', 'zhangsan','here is a comment',1);
+
 INSERT INTO `tb_follow` (`id`,  `from`,`from_id`,`to`,`to_id`) VALUES
     ('1', 'zhangans','1','lisi','2');
 INSERT INTO `tb_follow` (  `from`,`from_id`,`to`,`to_id`) VALUES
@@ -108,9 +116,9 @@ INSERT INTO `tb_passage_theme` ( `id`,`passage`,`passage_id`,`theme`,`theme_id`)
 
 
 -- 修改一下两个id值的属性，统一为Integer
-USE bbs
-ALTER TABLE `tb_comment` MODIFY `passage` BIGINT(20)
-ALTER TABLE `tb_comment` MODIFY `father` BIGINT(20)
+USE bbs;
+ALTER TABLE `tb_comment` MODIFY `passage` BIGINT(20);
+ALTER TABLE `tb_comment` MODIFY `father` BIGINT(20);
 
 -- 插一些数据
 -- user
@@ -120,13 +128,11 @@ INSERT INTO `bbs`.`tb_user` (`user_name`, `password`, `age`, `EMaIL`, `phone`, `
 INSERT INTO `bbs`.`tb_user` (`user_name`, `passwORD`, `agE`, `email`, `PHONe`, `academy`) VALUES ('slisary', '222222', '17', 'Rwydsuy@qq.com', '231321321', '计算机学院');
 
 -- passage
-INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('母猪产后护理', '论母猪产后护理', 'lisa','交友');
-INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('黑暗料理之道', 'aaaaaa', 'lisay','交友');
+INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('母猪产后护理', '论母猪产后护理', 'lisa','活动通知');
+INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('黑暗料理之道', 'aaaaaa', 'lisay','活动通知');
 INSERT INTO `bbs`.`tb_passage` (`title`, `description`, `user_name`,`theme`) VALUES ('母狗产后护理', 'bbbbb', 'lisa','失物招领');
 
--- comment
-INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `passage`, `father`) VALUES ('lisa', 'aaaaa', '1', '1');
-INSERT INTO `bbs`.`tb_comment` (`user_name`, `content`, `pASSAGE`, `Father`) VALUES ('lsl', 'bbbbb', '1', '2');
+
 
 -- 创建新表，存储聊天记录
 USE bbs;
@@ -142,3 +148,10 @@ CREATE TABLE `tb_message_record` (
                                      `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                                      PRIMARY KEY(`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `tb_message_record`(from_user_id, to_user_id, message) values
+    (1,2,'111111111');
+INSERT INTO `tb_message_record`(from_user_id, to_user_id, message) values
+    (2,1,'111111111');
+INSERT INTO `tb_message_record`(from_user_id, to_user_id, message) values
+    (1,2,'111111111');

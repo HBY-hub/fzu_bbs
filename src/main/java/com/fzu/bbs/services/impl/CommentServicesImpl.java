@@ -22,7 +22,7 @@ public class CommentServicesImpl implements CommentServices {
         comment.setContent(content);
         comment.setPassage(Math.toIntExact(passageId));
         comment.setFather(Math.toIntExact(father));
-        comment.setUser_name(username);
+        comment.setUserName(username);
         commentMapper.insert(comment);
         return false;
     }

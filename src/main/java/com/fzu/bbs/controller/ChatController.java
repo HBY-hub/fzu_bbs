@@ -12,16 +12,13 @@ import com.fzu.bbs.utils.R;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @Api(tags = {"实时聊天相关的接口"})
 public class ChatController {
 
@@ -31,7 +28,7 @@ public class ChatController {
     UserServices userServices;
 
     @GetMapping("/getMessageRecord")
-    public R getMessageRecord(@RequestBody Map<String,Object> args){
+    public R getMessageRecord(@RequestParam Map<String,Object> args){
         MessageRecord messageRecord = JSON.parseObject(JSON.toJSONString(args),MessageRecord.class);
 
         List<MessageRecord> messageRecordList = messageRecordServices.getMessageRecord(messageRecord.getFromUserId(),messageRecord.getToUserId());
@@ -54,7 +51,8 @@ public class ChatController {
     @GetMapping("/getUserByName")
     @ResponseBody
     public User getUserByName(@RequestParam Map<String, Object> args) throws JsonProcessingException{
-        User user = userServices.getUserByName((String) args.get("username")).get(0);
+        String username = (String) args.get("username");
+        User user = userServices.getUserByName(username).get(0);
         return user;
     }
 
