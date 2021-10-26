@@ -81,7 +81,7 @@ public class FaceLoginController {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        File image = multipartFileToFile(file, "D:\\");
+        File image = multipartFileToFile(file, faceLoc);
 
         try {
             FileSystemResource resource = new FileSystemResource(image);
@@ -110,7 +110,7 @@ public class FaceLoginController {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        File image = multipartFileToFile(file, "D:\\");
+        File image = multipartFileToFile(file, faceLoc);
 
         try {
             FileSystemResource resource = new FileSystemResource(image);
