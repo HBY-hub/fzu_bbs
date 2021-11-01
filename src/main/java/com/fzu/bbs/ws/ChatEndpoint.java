@@ -76,10 +76,10 @@ public class ChatEndpoint {
         ReceiveMessege receiveMessege  = JSON.parseObject(receiveMessegeStr,ReceiveMessege.class);
 
         if (userList.containsKey(receiveMessege.getToUserId())){//如果消息的接受者当前在线的话
-            //将消息存进数据库,同时将这条消息设置为已读
-            messageRecordServices.addMessageRecord(receiveMessege.getFromUserId(), receiveMessege.getToUserId(), receiveMessege.getMessage(),true);
             //封装消息
             String res = WebsocketUtil.getResultMessege(receiveMessege.getFromUserId(),receiveMessege.getToUserId(),receiveMessege.getMessage());
+            //将消息存进数据库,同时将这条消息设置为已读
+            messageRecordServices.addMessageRecord(receiveMessege.getFromUserId(), receiveMessege.getToUserId(), receiveMessege.getMessage(),true);
             //发送消息
             try {
                 userList.get(receiveMessege.getToUserId()).session.getBasicRemote().sendText(res);
