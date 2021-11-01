@@ -56,13 +56,13 @@ public class ChatEndpoint {
             //设置消息已读
             messageRecordServices.setMessageReaded(record.getId());
             //封装消息
-            String res = WebsocketUtil.getResultMessege(record.getFromUserId(),record.getToUserId(),record.getMessage());
-            try {
-                //发送消息
-                userList.get(record.getToUserId()).session.getBasicRemote().sendText(res);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+//            String res = WebsocketUtil.getResultMessege(record.getFromUserId(),record.getToUserId(),record.getMessage());
+//            try {
+//                //发送消息
+//                userList.get(record.getToUserId()).session.getBasicRemote().sendText(res);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
         }
         //把自己加入map
         userList.put(userId,this);
