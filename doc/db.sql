@@ -11,7 +11,7 @@ CREATE TABLE `tb_user` (
                            `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
                            `phone` varchar(50) DEFAULT NULL COMMENT '手机',
                            `academy` varchar(50) DEFAULT NULL COMMENT '学院',
-                           `avatar` varchar(100) DEFAULT NULL comment '头像url',
+                           `avatar` varchar(255) DEFAULT NULL comment '头像url',
                            `face_data` text DEFAULT NULL comment '脸部数据',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

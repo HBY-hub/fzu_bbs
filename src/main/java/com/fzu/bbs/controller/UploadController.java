@@ -1,5 +1,6 @@
 package com.fzu.bbs.controller;
 
+import com.fzu.bbs.services.UserServices;
 import com.fzu.bbs.utils.AliyunOSSUtil;
 import com.fzu.bbs.utils.R;
 import io.swagger.annotations.Api;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class UploadController {
     @Autowired
     private AliyunOSSUtil aliyunOSSUtil;
+    @Autowired
+    private UserServices userServices;
 
     @GetMapping("/ossUpload")
     public String getUpload(){
@@ -40,6 +43,34 @@ public class UploadController {
                     //上传到OSS
 //                    return aliyunOSSUtil.uploadFile(newFile);
                     return R.ok(aliyunOSSUtil.uploadFile(newFile));
+
+                }
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return R.fail();
+    }
+
+
+    @PostMapping("/avatarUpload")
+    @ApiOperation("上传BlogPost")
+    public R avatarUpload(MultipartFile file,Integer id) {
+        try {
+            if (null != file) {
+                String filename = file.getOriginalFilename();
+                if (!"".equals(filename.trim())) {
+                    File newFile = new File(filename);
+                    FileOutputStream os = new FileOutputStream(newFile);
+                    os.write(file.getBytes());
+                    os.close();
+                    file.transferTo(newFile);
+                    //上传到OSS
+//                    return aliyunOSSUtil.uploadFile(newFile);
+                    String url = aliyunOSSUtil.uploadFile(newFile);
+                    userServices.updateAvatar(id,url) ;
+                    return R.ok();
 
                 }
 

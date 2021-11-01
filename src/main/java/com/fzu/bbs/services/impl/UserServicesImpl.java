@@ -93,4 +93,12 @@ public class UserServicesImpl implements UserServices {
         return null;
 
     }
+
+    @Override
+    public boolean updateAvatar(Integer id, String url) {
+        User user = userMapper.selectById(id);
+        user.setAvatar(url);
+        Integer res =  userMapper.updateById(user);
+        return res>=0;
+    }
 }

@@ -12,4 +12,5 @@ public interface UserServices {
     Integer checkUser(String username,String password);
     void updateUserFace(Integer userId,String faceData);
     User checkFace(String face);
+    boolean updateAvatar(Integer id,String url);
 }

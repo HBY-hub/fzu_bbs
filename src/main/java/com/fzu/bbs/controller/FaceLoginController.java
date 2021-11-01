@@ -76,7 +76,7 @@ public class FaceLoginController {
 
 
     @PostMapping("/faceUpload")
-    public R faceUpload(MultipartFile file,Integer userId) throws Exception {
+    public R faceUpload(MultipartFile file,Integer id) throws Exception {
         final String url = faceUrl+"/uploadfile";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -95,7 +95,7 @@ public class FaceLoginController {
 
             String body = restTemplate.postForEntity(url, httpEntity, String.class).getBody();
             body = body.substring(1,body.length()-1);
-            userServices.updateUserFace(userId,body);
+            userServices.updateUserFace(id,body);
             return R.ok(body,"ok");
         } catch (RestClientException e) {
             e.printStackTrace();
