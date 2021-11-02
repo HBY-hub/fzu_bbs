@@ -23,8 +23,8 @@ public class CommentController {
     public R addCommnet(@RequestParam Map<String, Object> args) {
         String username = (String) args.get("username");
         String content = (String) args.get("content");
-        Integer father = (Integer) args.get("father");
-        Integer passageId = (Integer) args.get("passageId");
+        Integer father = Integer.valueOf((String) args.get("father"));
+        Integer passageId = Integer.valueOf((String) args.get("passageId"));
         commentServices.addComment(content, father, passageId, username);
         return R.ok();
     }
