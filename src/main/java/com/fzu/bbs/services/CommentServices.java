@@ -9,4 +9,5 @@ public interface CommentServices {
     boolean deleteComment(Integer commentId);
     List<Comment> getCommentsWithFatherId(Integer fatherId);
     List<Comment> getCommentByPassageId(Integer passageId);
+    Comment getCommentById(Integer id);
 }

@@ -57,4 +57,10 @@ public class CommentServicesImpl implements CommentServices {
         List<Comment> comments = commentMapper.selectList(queryWrapper);
         return comments;
     }
+
+    @Override
+    public Comment getCommentById(Integer id) {
+        Comment comment = commentMapper.selectById(id);
+        return comment;
+    }
 }

@@ -36,5 +36,11 @@ public class CommentController {
         return R.ok(commentServices.getCommentByPassageId(passageId));
     }
 
+    @GetMapping("getCommentById")
+    public R getCommentById(@RequestParam Map<String,Object> args){
+        String IdStr  = (String)  args.get("id");
+        Integer id = Integer.valueOf( IdStr );
+        return R.ok(commentServices.getCommentById(id));
+    }
 
 }
