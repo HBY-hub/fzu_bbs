@@ -40,7 +40,7 @@ public class PassageController {
         }
 
         passageThemeServices.addPassageTheme(passage.getTitle(),theme);
-        return R.ok();
+        return R.ok(id);
     }
 
 
