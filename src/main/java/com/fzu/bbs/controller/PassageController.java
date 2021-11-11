@@ -3,6 +3,7 @@ package com.fzu.bbs.controller;
 import com.alibaba.fastjson.JSON;
 import com.fzu.bbs.po.Passage;
 import com.fzu.bbs.po.Theme;
+import com.fzu.bbs.services.DetailServices;
 import com.fzu.bbs.services.ImageServices;
 import com.fzu.bbs.services.PassageServices;
 import com.fzu.bbs.services.PassageThemeServices;
@@ -25,6 +26,8 @@ public class PassageController {
     private PassageThemeServices passageThemeServices;
     @Autowired
     private ImageServices imageServices;
+    @Autowired
+    private DetailServices detailServices;
 
     @PostMapping("addPassage")
     @ResponseBody
@@ -38,8 +41,8 @@ public class PassageController {
 //            System.out.println(((List<String>) args.get("image")).get(i));
             imageServices.addImage(passage.getId(), ((List<String>) args.get("image")).get(i));
         }
-
-        passageThemeServices.addPassageTheme(passage.getTitle(),theme);
+        detailServices.insertPassage(passage.getId());
+        //passageThemeServices.addPassageTheme(passage.getTitle(),theme);
         return R.ok(id);
     }
 
