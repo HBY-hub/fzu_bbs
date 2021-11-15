@@ -38,6 +38,21 @@ public class LoginController {
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         return R.ok(tokenInfo);
     }
+
+    @PostMapping(value = "/register")
+    @ResponseBody
+    @ApiOperation("注册")
+    public R register(@RequestBody Map<String,Object> args){
+        User user = new User();
+        String userName = (String) args.get("name");
+        String password = (String)  args.get("password");
+        user.setUserName(userName);
+        user.setPassword(password);
+        userServices.addUser(user);
+        return R.ok();
+    }
+
+
     @GetMapping("/login")
     @ResponseBody
     @ApiOperation("获得当前登录用户")
