@@ -35,6 +35,13 @@ public class ChatController {
         return R.ok(messageRecordList);
     }
 
+    @GetMapping("/getAllMessageRecord")
+    public R getAllMessageRecord(@RequestParam Map<String,Object> args){
+        Integer id = Integer.valueOf((String)  args.get("id"));
+        List<MessageRecord> messageRecordList = messageRecordServices.getAllMessageRecord(id);
+        return R.ok(messageRecordList);
+    }
+
     @GetMapping("/toChatroom")
     public String toChatroom(){
         return "chat";

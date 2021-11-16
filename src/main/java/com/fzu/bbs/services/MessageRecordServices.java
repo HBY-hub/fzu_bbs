@@ -20,4 +20,6 @@ public interface MessageRecordServices {
     boolean deleteMessageRecord(Integer messageRecordId);
     //根据id设置一条消息已读
     boolean setMessageReaded(Integer messageId);
+
+    List<MessageRecord> getAllMessageRecord(Integer id);
 }

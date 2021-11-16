@@ -97,4 +97,12 @@ public class MessageRecordServicesImpl implements MessageRecordServices {
         if (clums > 0) return true;
         else return false;
     }
+
+    @Override
+    public List<MessageRecord> getAllMessageRecord(Integer id) {
+        QueryWrapper<MessageRecord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("from_user_id",id).or().eq("to_user_id",id).orderByAsc("create_time");
+        List<MessageRecord> list=  messageRecordMapper.selectList(queryWrapper);
+        return list;
+    }
 }
