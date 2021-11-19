@@ -3,6 +3,7 @@ package com.fzu.bbs.controller;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson.JSON;
+import com.fzu.bbs.mapper.UserMapper;
 import com.fzu.bbs.po.User;
 import com.fzu.bbs.services.UserServices;
 import com.fzu.bbs.utils.R;
@@ -49,6 +50,24 @@ public class LoginController {
         user.setUserName(userName);
         user.setPassword(password);
         userServices.addUser(user);
+        return R.ok();
+    }
+    @Autowired
+    UserMapper userMapper;
+
+    @PostMapping(value = "/edit")
+    @ResponseBody
+    @ApiOperation("注册")
+    public R edit(@RequestBody Map<String,Object> args){
+        Integer id = (Integer) args.get("id");
+        String academy = (String) args.get("academy");
+        String phone = (String) args.get("phone");
+        String userName = (String) args.get("userName");
+        User user = userServices.getUserById(id);
+        user.setAcademy(academy);
+        user.setPhone(phone);
+        user.setUserName(userName);
+        userMapper.updateById(user);
         return R.ok();
     }
 
