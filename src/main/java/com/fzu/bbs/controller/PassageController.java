@@ -68,4 +68,12 @@ public class PassageController {
         Passage passage = passageServices.getPassageById(id);
         return R.ok(passage);
     }
+
+    @GetMapping("deletePassageById")
+    public R deletePassageById(@RequestParam Map<String,Object> args){
+        String IdStr = (String) args.get("id");
+        Integer id  = Integer.valueOf(IdStr);
+        passageServices.deletePassageById(id);
+        return R.ok();
+    }
 }
