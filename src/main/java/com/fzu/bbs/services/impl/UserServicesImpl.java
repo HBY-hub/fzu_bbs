@@ -49,7 +49,7 @@ public class UserServicesImpl implements UserServices {
         List<User> userList = new ArrayList();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper
-                .like("user_name",username);
+                .eq("user_name",username);
 //        queryWrapper.eq("user_name",username);
         userList = userMapper.selectList(queryWrapper);
         userList.sort(new Comparator<User>() {

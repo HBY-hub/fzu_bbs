@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -62,11 +63,9 @@ public class LoginController {
         Integer id = (Integer) args.get("id");
         String academy = (String) args.get("academy");
         String phone = (String) args.get("phone");
-        String userName = (String) args.get("userName");
         User user = userServices.getUserById(id);
         user.setAcademy(academy);
         user.setPhone(phone);
-        user.setUserName(userName);
         userMapper.updateById(user);
         return R.ok();
     }
@@ -81,6 +80,15 @@ public class LoginController {
         User user = userServices.getUserById(id);
         if(user==null)return R.fail();
         return R.ok(user);
+    }
+    @PostMapping("/getUserByName")
+    @ResponseBody
+    @ApiOperation("获得当前登录用户")
+    public R getUserByName(@RequestBody Map<String,Object> args){
+        String name = (String) args.get("userName");
+        List<User> lists = userServices.getUserByName(name);
+        if(lists.size()>0)return R.fail();
+        return R.ok();
     }
 
     @GetMapping("/logout")
